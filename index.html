@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>专升本考试成绩查询 · 查询入口</title>
+<style>
+  :root{
+    --brand:#1a5fb4;
+    --brand-2:#2f7de1;
+    --ink:#1f2733;
+    --muted:#6b7684;
+    --line:#e3e8ef;
+    --card:#ffffff;
+    --err:#d9480f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+    background:linear-gradient(160deg,#e9f0f9 0%,#f4f7fb 40%,#eef2f7 100%);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 16px 60px;
+  }
+  .wrap{width:100%;max-width:460px;}
+
+  /* Header */
+  .head{
+    background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);
+    color:#fff;
+    border-radius:16px 16px 0 0;
+    padding:34px 32px 30px;
+    box-shadow:0 10px 30px rgba(26,95,180,.18);
+    text-align:center;
+  }
+  .emblem{
+    width:64px;height:64px;margin:0 auto 14px;border-radius:50%;
+    background:rgba(255,255,255,.16);
+    border:2px solid rgba(255,255,255,.55);
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px;
+  }
+  .head h1{font-size:22px;font-weight:700;letter-spacing:.5px;}
+  .head p{font-size:13px;opacity:.88;margin-top:8px;letter-spacing:2px;}
+
+  /* Card */
+  .card{
+    background:var(--card);
+    border-radius:0 0 16px 16px;
+    box-shadow:0 18px 50px rgba(24,44,74,.10);
+    padding:30px 32px 34px;
+  }
+  .hint{
+    font-size:13px;color:var(--muted);line-height:1.7;
+    background:#f7f9fc;border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px;margin-bottom:22px;
+  }
+  .hint b{color:var(--brand);}
+
+  .form-field{margin-bottom:18px;}
+  .form-field label{
+    display:block;font-size:13px;color:var(--ink);font-weight:600;
+    margin-bottom:8px;letter-spacing:.5px;
+  }
+  .form-field .req{color:var(--err);margin-left:3px;}
+  .input{
+    width:100%;font-size:15px;color:var(--ink);
+    border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;outline:none;background:#fcfdff;
+    transition:border-color .15s ease,box-shadow .15s ease;
+    font-family:inherit;
+  }
+  .input::placeholder{color:#a9b3bf;}
+  .input:focus{border-color:var(--brand-2);box-shadow:0 0 0 3px rgba(47,125,225,.14);background:#fff;}
+  .input.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;letter-spacing:.5px;}
+
+  .btn-submit{
+    width:100%;margin-top:8px;
+    font-size:16px;font-weight:700;color:#fff;letter-spacing:2px;
+    background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);
+    border:none;border-radius:10px;padding:14px;
+    cursor:pointer;transition:box-shadow .15s ease,transform .15s ease,opacity .15s ease;
+    box-shadow:0 8px 20px rgba(26,95,180,.22);
+  }
+  .btn-submit:hover{box-shadow:0 10px 26px rgba(26,95,180,.30);}
+  .btn-submit:active{transform:translateY(1px);}
+
+  .error{
+    display:none;font-size:13px;color:var(--err);
+    background:#fdece4;border:1px solid #f6c9b6;
+    border-radius:9px;padding:10px 13px;margin-top:16px;line-height:1.6;
+  }
+  .error.show{display:block;}
+
+  .footnote{
+    text-align:center;font-size:12px;color:var(--muted);
+    margin-top:24px;line-height:1.8;letter-spacing:.5px;
+  }
+  .footnote a{color:var(--brand);text-decoration:none;}
+  .footnote a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <div class="emblem">🎓</div>
+      <div>
+        <h1>专升本考试成绩查询</h1>
+        <p>高等教育自学考试 · 查询入口</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="hint">
+        请输入考生 <b>姓名</b> 与 <b>身份证号</b> 查询本次考试成绩。<br>
+        示例：朱佳怡 / 310113200407065524
+      </div>
+
+      <form id="queryForm" autocomplete="off">
+        <div class="form-field">
+          <label for="name">考生姓名<span class="req">*</span></label>
+          <input class="input" type="text" id="name" name="name" placeholder="请输入姓名" required>
+        </div>
+
+        <div class="form-field">
+          <label for="idcard">身份证号<span class="req">*</span></label>
+          <input class="input mono" type="text" id="idcard" name="idcard" placeholder="请输入身份证号" maxlength="18" required>
+        </div>
+
+        <button class="btn-submit" type="submit">查 询 成 绩</button>
+        <div class="error" id="error"></div>
+      </form>
+
+      <div class="footnote">
+        如已确认考生信息，也可直接 <a href="result.html">查看成绩单 →</a>
+      </div>
+    </div>
+  </div>
+
+<script>
+  var EXPECTED_NAME = "朱佳怡";
+  var EXPECTED_ID = "310113200407065524";
+
+  var form = document.getElementById("queryForm");
+  var nameEl = document.getElementById("name");
+  var idEl = document.getElementById("idcard");
+  var errorEl = document.getElementById("error");
+
+  function showError(msg){
+    errorEl.textContent = msg;
+    errorEl.classList.add("show");
+  }
+  function clearError(){
+    errorEl.textContent = "";
+    errorEl.classList.remove("show");
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    clearError();
+
+    var name = nameEl.value.trim();
+    var id = idEl.value.trim();
+
+    if(!name){ return showError("请输入考生姓名。"); }
+    if(!id){ return showError("请输入身份证号。"); }
+
+    if(name !== EXPECTED_NAME || id !== EXPECTED_ID){
+      return showError("未查询到该考生信息，请核对姓名与身份证号后重试。");
+    }
+
+    // 校验通过，跳转成绩单页
+    window.location.href = "result.html";
+  });
+</script>
+</body>
+</html>
